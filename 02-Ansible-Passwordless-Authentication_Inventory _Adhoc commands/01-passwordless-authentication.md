@@ -7,6 +7,7 @@
 ```
 ssh-copy-id -f "-o IdentityFile <PATH TO PEM FILE>" ubuntu@<INSTANCE-PUBLIC-IP>
 ```
+or
 ```
  ssh-copy-id -f -i Ubuntu_Key1.pem ubuntu@44.201.152.127
 ````
