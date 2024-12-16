@@ -30,6 +30,43 @@ When you are using WSL (Windows Subsystem for Linux)
 ### Using Password 
 
 - Go to the file `/etc/ssh/sshd_config.d/60-cloudimg-settings.conf`
+    ```
+    sudo nano /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
+    ```
+>Note: This is for e2 instance, if you are using another type of VM, then use `sudo vim /etc/ssh/sshd_config` command, and uncomment `PasswordAuthentication` feild
+
 - Update `PasswordAuthentication yes`
 - Restart SSH -> `sudo systemctl restart ssh`
+- now create a password for ubuntu user
+   ```
+   sudo passwd ubuntu
+   ````
+ - now you can logout and check whether you can access it using password or not
+   ```
+   ssh-copy-id ubuntu@3.86.30.71
+   ````
+
+>Note: For this you must have SSH Key Pair on Your Local Machine. If you are using WSL with windows, please follow following steps
+```
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
+```
+ssh-add -l
+```
+- If it shows `The agent has no identities`, you need to add your private key manually:
+     ```
+      ssh-add ~/.ssh/id_rsa
+     ```
+```
+ssh-add -l
+```
+```
+ssh-copy-id ubuntu@18.206.127.98
+```
+
+
+
+
+   
 
