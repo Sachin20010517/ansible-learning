@@ -7,9 +7,19 @@
 ```
 ssh-copy-id -f "-o IdentityFile <PATH TO PEM FILE>" ubuntu@<INSTANCE-PUBLIC-IP>
 ```
-or
+    
+When you are using WSL (Windows Subsystem for Linux)
 ```
- ssh-copy-id -f -i Ubuntu_Key1.pem ubuntu@44.201.152.127
+ ssh-keygen -y -f ubuntu-default-key.pem > ubuntu-default-key.pem.pub
+ eval $(ssh-agent -s)
+ ssh-add ~/Ubuntu_Key1.pem
+
+ 
+ ssh-copy-id -f -i Ubuntu_Key1.pem ubuntu@3.86.30.71
+ 
+ 
+ ssh ubuntu@3.86.30.71
+
 ````
 
 - ssh-copy-id: This is the command used to copy your public key to a remote machine.
