@@ -42,7 +42,7 @@ ansible all -m copy -a "src=/path/to/local/file dest=/path/to/remote/file"
 ### 4. **Check Free Memory**
 Get information about free memory on remote hosts:
 ```bash
-ansible all -m shell -a "free -m"
+ansible -i /etc/ansible/hosts/inventory.ini -m shell -a "free -m" all
 ```
 
 ### 5. **Restart a Service**
@@ -56,12 +56,11 @@ Install a package using the `apt` or `yum` module:
 
 - For CentOS/RHEL:
   ```bash
-  ansible all -m yum -a "name=httpd state=present"
   ```
 
 - For Debian/Ubuntu:
   ```bash
-  ansible all -m apt -a "name=apache2 state=present"
+  ansible -i /etc/ansible/hosts/inventory.ini -m shell -a "sudo apt install docker.io -y" all
   ```
 
 ### 7. **Change File Permissions**
