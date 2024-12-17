@@ -45,12 +45,6 @@ Get information about free memory on remote hosts:
 ansible -i /etc/ansible/hosts/inventory.ini -m shell -a "free -m" all
 ```
 
-### 5. **Restart a Service**
-Restart a service, e.g., `nginx`:
-```bash
-ansible webservers -m service -a "name=nginx state=restarted"
-```
-
 ### 6. **Install a Package**
 Install a package using the `apt` or `yum` module:
 
@@ -63,68 +57,38 @@ Install a package using the `apt` or `yum` module:
   ansible -i /etc/ansible/hosts/inventory.ini -m shell -a "sudo apt install docker.io -y" all
   ```
 
-### 7. **Change File Permissions**
-Change permissions for a file:
-```bash
-ansible all -m file -a "path=/path/to/file mode=0644"
-```
 
-### 8. **Create a User**
+
+### 7. **Create a User**
 Create a new user on remote hosts:
 ```bash
-ansible all -m user -a "name=testuser state=present"
+ansible -i /etc/ansible/hosts/inventory.ini -m user -a "name=admin-sachin password={{ '1234' | password_hash('sha512') }} state=present" db --become --become-user=root
 ```
 
-### 9. **Gather Facts**
-Get detailed information about the managed hosts:
+##Ansible Inventory File Grouping
+
+### 8. **Grouping Hosts in the Inventory File**
+In Ansible, the inventory file is used to define groups of hosts and their properties. Grouping hosts together allows you to run commands and tasks on specific subsets of your infrastructure, which can be very useful for managing large-scale environments.
 ```bash
-ansible all -m setup
+[web]
+ubuntu@18.206.127.98
+ubuntu@54.172.6.7
+
+[db]
+ubuntu@44.201.221.194
+```
+### 9. **Ping only DB group Hosts**
+
+```bash
+ansible -i /etc/ansible/hosts/inventory.ini -m ping db
 ```
 
 ### 10. **Check Uptime**
 Check the uptime of remote hosts:
 ```bash
-ansible all -m command -a "uptime"
+ansible -i /etc/ansible/hosts/inventory.ini -m command -a "uptime" all
 ```
 
-### 11. **Reboot Hosts**
-Reboot remote hosts:
-```bash
-ansible all -m reboot
-```
-
-### 12. **Fetch a File from Remote Hosts**
-Retrieve a file from remote hosts to the control node:
-```bash
-ansible all -m fetch -a "src=/remote/path/to/file dest=/local/path"
-```
-
-### 13. **Manage Firewall Rules**
-Enable HTTP traffic in the firewall (e.g., using `firewalld` on CentOS):
-```bash
-ansible all -m firewalld -a "port=80/tcp state=enabled permanent=true"
-```
-
----
-
-## How to Contribute
-
-1. Fork the repository.
-2. Create a new branch for your changes:
-   ```bash
-   git checkout -b my-feature-branch
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Added new Ansible command examples"
-   ```
-4. Push your branch:
-   ```bash
-   git push origin my-feature-branch
-   ```
-5. Open a pull request.
-
----
 
 ## License
 
