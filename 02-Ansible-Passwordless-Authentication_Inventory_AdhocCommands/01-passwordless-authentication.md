@@ -68,5 +68,27 @@ ssh-copy-id ubuntu@18.206.127.98
 
 
 
+## Issue:
+
+When you use SSH passwordless authentication in WSL, the SSH agent doesn't automatically load your SSH key after restarting WSL, opening a new terminal, or closing and reopening the terminal. This results in the inability to SSH into your remote servers without re-adding the SSH key manually.
+
+Here’s an example of the steps that work initially, but fail after restarting the terminal:
+
+```
+nano ~/.bashrc
+```
+Add the following lines to start the SSH agent and load your SSH key automatically every time a new terminal session is opened:
+```
+# Start SSH Agent and add the key automatically
+eval $(ssh-agent -s)  # Start the SSH agent
+ssh-add -q ~/Ubuntu_Key1.pem  # Replace with the correct path to your private key
+```
+Apply the changes: After editing the file, apply the changes by running the following command:
+
+```
+source ~/.bashrc  # Or source ~/.zshrc for Zsh users
+```
+
+
    
 
