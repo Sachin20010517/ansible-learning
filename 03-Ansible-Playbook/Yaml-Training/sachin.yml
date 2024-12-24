@@ -1,0 +1,31 @@
+---
+name: Sachin Ayeshmantha
+age: 23
+married: false
+Nationality: "Sri Lankan" #This is also a string
+
+#List
+education:
+  - Ordinary Level
+  - Advance Level
+  - BSc. Computer Science
+
+#Dictionary
+resident:
+  village: Thalgasgoda
+  town: Ambalangoda
+  provice: Southern
+  country: Sri Lankan
+
+#List of dictionaries
+family:
+  parents:
+    - name: Sujith Kumara
+      age: 50
+    - name: Kumuduni Damayanthi
+      age: 48
+  children:
+    - name: Jimy
+      age: 10
+    - name: Jenny
+      age: 8        
